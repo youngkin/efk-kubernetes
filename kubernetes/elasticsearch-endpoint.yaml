@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ext-elastic
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9200
+    name: ext-elastic
+    targetPort: 9200
+  selector: {}
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: ext-elastic
+subsets:
+  - addresses:
+      - ip: 10.0.0.223
+    ports:
+      - port: 9200
+        name: ext-elastic
